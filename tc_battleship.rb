@@ -11,6 +11,6 @@ class TestBattleship < Test::Unit::TestCase
         assert_equal(true, Battleship.new(10, 10,'x  ').attack(coord, @board), 'Test Attaque !' )
     end
     def test_win
-        assert_equal(true, Battleship.new(10, 10,'x  ').checkWin(), 'Test Win !' )
+        assert_equal(nil, Battleship.new(10, 10,'x  ').checkWin(), 'Test Win !' )
     end
 end

@@ -177,9 +177,7 @@ class Battleship
         print "\n"
 
         showMap()
-        # return true
-        # receiveAttack = attack
-        
+
         require "readline"
         coords = []
         count = 2
@@ -246,10 +244,10 @@ class Battleship
             end
         end
         if @teamDestroyed.count == 5
-            print "Vous avez detruit tout les bateaux !!\n"
+            print "Vous avez detruit tout les bateaux !\n"
             return true
         end
-        return true
+        print @teamDestroyed, "\n"
     end
 
     def showMap()
