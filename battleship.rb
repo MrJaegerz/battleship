@@ -195,6 +195,9 @@ class Battleship
                     count = 1
                 end
             end
+            if checkWin() == true
+                return true
+            end
             count += 1
         end
     end
@@ -205,69 +208,48 @@ class Battleship
             print "Vous avez touché le Cruiser !\n"
             @board[Integer(coordAttack[0])][Integer(coordAttack[1])] = "O  "
             @ships["cruiser"] = @ships["cruiser"] - 1
+            return true
         when "D  "
             print "Vous avez touché le Destroyer !\n"
             @board[Integer(coordAttack[0])][Integer(coordAttack[1])] = "O  "
             @ships["destroyer"] = @ships["destroyer"] - 1
+            return true
         when "B  "
             print "Vous avez touché le Battleship !\n"
             @board[Integer(coordAttack[0])][Integer(coordAttack[1])] = "O  "
             @ships["battleship"] = @ships["battleship"] - 1
+            return true
         when "S  "
             print "Vous avez touché le submarine !\n"
             @board[Integer(coordAttack[0])][Integer(coordAttack[1])] = "O  "
             @ships["submarine"] = @ships["submarine"] - 1
+            return true
         when "K  "
             print "Vous avez touché un Carrier !\n"
             @board[Integer(coordAttack[0])][Integer(coordAttack[1])] = "O  "
             @ships["carrier"] = @ships["carrier"] - 1
+            return true
         else
             print "Vous avez tiré dans l'eau !\n"
             @board[Integer(coordAttack[0])][Integer(coordAttack[1])] = "O  "
+            return true
         end
         checkWin()
+        return true
     end
 
     def checkWin()
-        @ships.each do |key, ship|
-            # print ship,' ', key
-            # print "\n"
-            
+        @ships.each do |key, ship|            
             if ship == 0
-                print @ships
-                print "\n"
+                @ships[key] = nil
                 @teamDestroyed.push key
-                print @teamDestroyed, "\n"
-                @teamDestroyed.group_by{ |e| e }.select { |k, v| v.size > 1 }.map(&:first)
-                @teamDestroyed.sort.chunk{ |e| e }.select { |e, chunk| chunk.size > 1 }.map(&:first)
-                @teamDestroyed.select{ |e| @teamDestroyed.count(e) > 1 }.uniq
-                print @teamDestroyed
-                # if @teamDestroyed.count == 0
-                #     @teamDestroyed.push key
-                
-                # else
-                #     @teamDestroyed.each do |aKey, desShip| 
-                #         print aKey," Toto ! ", key, "\n"
-                #         if key == aKey
-                #             print "im in true\n"
-                #         else
-                #             print "im in else \n"
-                #             @teamDestroyed.push key
-                #             return true
-                #         end
-                #     end
-                
-                # end
             end
         end
-
         if @teamDestroyed.count == 5
             print "Vous avez detruit tout les bateaux !!\n"
             return true
         end
-
-        print @teamDestroyed
-        print "\n"
+        return true
     end
 
     def showMap()
@@ -277,6 +259,7 @@ class Battleship
             end
             print "\n" 
         end
+        return true
     end
 end
 
